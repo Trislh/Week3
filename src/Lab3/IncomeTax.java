@@ -21,6 +21,9 @@ public class IncomeTax {
         this.tax_filers = tax_filers;
     }
 
+    public IncomeTax() {
+    }
+
     // Set & Get methods
     void setIncome(double income) { this.income = income; }
     void setTax_filers(int tax_filers) { this.tax_filers = tax_filers; }
@@ -48,6 +51,24 @@ public class IncomeTax {
             return tax_rate[5] * income;
         } else {
             return tax_rate[6] * income;
+        }
+    }
+    void printTable(double from_inc, double to_inc) {
+        String IC = "Income";
+        String UI = "Unmarried individuals";
+        String MS = "Married...separately";
+        String MJ = "Married...jointly";
+        String HH = "Head of households";
+        System.out.printf("%-12s %-25s %-24s %-23s %-22s\n",IC,UI,MS,MJ,HH);
+        for ( double i = from_inc; i <= to_inc; i+=from_inc) {
+            setIncome(i);
+            System.out.printf("%-15.1f",i);
+            for (tax_filers = 0; tax_filers < 4; tax_filers++) {
+                double result = calIncomeTax();
+                System.out.printf("%-25.1f", result);
+
+            }
+            System.out.println();
         }
     }
 }
